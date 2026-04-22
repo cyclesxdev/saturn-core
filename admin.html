@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saturn - Admin Panel</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial;
+}
+
+body {
+    background: linear-gradient(135deg, #0f0f14, #1a1a2e, #0f0f14);
+    color: white;
+}
+
+/* HEADER */
+header {
+    background: rgba(20,20,30,0.7);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    text-align: center;
+    padding: 15px;
+}
+
+h1 {
+    color: #5865f2;
+}
+
+/* CARD */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.panel {
+    background: rgba(30,30,45,0.6);
+    backdrop-filter: blur(15px);
+    padding: 40px;
+    border-radius: 16px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(0,0,0,0.6);
+}
+
+button {
+    padding: 12px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.on {
+    background: #ff4d4d;
+    color: white;
+}
+
+.off {
+    background: #5865f2;
+    color: white;
+}
+
+button:hover {
+    transform: translateY(-3px);
+}
+
+.status {
+    margin-top: 15px;
+    color: #bbb;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Saturn - Admin</h1>
+</header>
+
+<div class="container">
+    <div class="panel">
+
+        <h2>Maintenance Mode</h2>
+
+        <button class="on" onclick="enableMaintenance()">Enable</button>
+        <button class="off" onclick="disableMaintenance()">Disable</button>
+
+        <div class="status" id="status"></div>
+
+    </div>
+</div>
+
+<script>
+function enableMaintenance() {
+    localStorage.setItem("maintenance", "true");
+    updateStatus();
+}
+
+function disableMaintenance() {
+    localStorage.setItem("maintenance", "false");
+    updateStatus();
+}
+
+function updateStatus() {
+    const status = document.getElementById("status");
+    const state = localStorage.getItem("maintenance");
+
+    if(state === "true") {
+        status.innerText = "Status: ACTIVE 🔴";
+    } else {
+        status.innerText = "Status: DISABLED 🟢";
+    }
+}
+
+updateStatus();
+</script>
+
+</body>
+</html>

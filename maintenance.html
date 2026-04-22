@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saturn - Maintenance</title>
+
+<link rel="icon" href="https://storage-saturn.neocities.org/sicon.png">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial;
+}
+
+body {
+    background: linear-gradient(135deg, #0f0f14, #1a1a2e, #0f0f14);
+    color: white;
+    overflow-x: hidden;
+}
+
+/* HEADER */
+header {
+    background: rgba(20,20,30,0.7);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.banner {
+    display: block;
+    margin: 0 auto;
+    max-width: 380px;
+    height: 70px;
+    object-fit: cover;
+    opacity: 0.9;
+}
+
+/* NAV */
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    padding: 15px;
+}
+
+nav a {
+    color: #aaa;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: white;
+}
+
+/* MAIN */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 150px);
+    padding: 20px;
+}
+
+/* BOX */
+.maintenance-box {
+    text-align: center;
+    background: rgba(30,30,45,0.6);
+    backdrop-filter: blur(15px);
+    padding: 50px;
+    border-radius: 16px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 0 40px rgba(0,0,0,0.6);
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.maintenance-box img {
+    width: 160px;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+.maintenance-box h1 {
+    color: #ff4d4d;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px rgba(255,77,77,0.5);
+}
+
+.maintenance-box p {
+    color: #bbb;
+    margin-bottom: 25px;
+}
+
+/* INPUT KEY */
+.key-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 10px;
+    background: rgba(255,255,255,0.05);
+    color: white;
+}
+
+/* BUTTON */
+.btn {
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #5865f2, #4752c4);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(88,101,242,0.4);
+    width: 100%;
+    margin-top: 5px;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px rgba(88,101,242,0.7);
+}
+
+.status {
+    font-size: 13px;
+    color: #888;
+    margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <img src="https://storage-saturn.neocities.org/saturnbanner.png" class="banner">
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Games</a>
+        <a href="#">Catalog</a>
+        <a href="#">Login</a>
+        <a href="#">Register</a>
+    </nav>
+</header>
+
+<main>
+    <div class="maintenance-box">
+
+        <img src="https://storage-saturn.neocities.org/OH_NOES.png">
+
+        <h1>Scheduled Maintenance</h1>
+
+        <p>
+            We are currently performing scheduled maintenance.<br>
+            Saturn will be back online shortly.
+        </p>
+
+        <!-- 🔑 KEY -->
+        <input type="password" id="key" class="key-input" placeholder="Enter Maintenance Key">
+
+        <button class="btn" onclick="checkKey()">Enter</button>
+
+        <div class="status" id="statusText">
+            Status: Working
+        </div>
+
+    </div>
+</main>
+
+<script>
+const SECRET_KEY = "32hRWEVMCqfxTflE3jWz-X93V4RmEOB5k2r3k1XZD-U";
+
+function checkKey(){
+    let input = document.getElementById("key").value;
+
+    if(input === SECRET_KEY){
+        localStorage.setItem("bypassMaintenance", "true");
+        document.getElementById("statusText").innerText = "Access Granted!";
+        
+        setTimeout(() => {
+            window.location.href = "/";
+        }, 1000);
+    } else {
+        document.getElementById("statusText").innerText = "Invalid Key!";
+    }
+}
+</script>
+
+</body>
+</html>

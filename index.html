@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saturn - Welcome</title>
+
+<link rel="icon" href="https://storage-saturn.neocities.org/sicon.png">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial;
+}
+
+body {
+    background: linear-gradient(135deg, #0f0f14, #1a1a2e, #0f0f14);
+    color: white;
+    overflow-x: hidden;
+}
+
+/* HEADER */
+header {
+    background: rgba(20,20,30,0.7);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.banner {
+    display: block;
+    margin: 0 auto;
+    max-width: 380px;
+    height: 70px;
+    object-fit: cover;
+    opacity: 0.9;
+}
+
+/* NAV */
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    padding: 15px;
+}
+
+nav a {
+    color: #aaa;
+    text-decoration: none;
+    font-weight: 600;
+    position: relative;
+    transition: 0.3s;
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background: #5865f2;
+    left: 0;
+    bottom: -5px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: white;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* MAIN */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 150px);
+    padding: 20px;
+}
+
+/* CARD */
+.welcome-box {
+    text-align: center;
+    background: rgba(30,30,45,0.6);
+    backdrop-filter: blur(15px);
+    padding: 50px;
+    border-radius: 16px;
+    max-width: 520px;
+    width: 100%;
+    box-shadow: 0 0 40px rgba(0,0,0,0.6);
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.welcome-box h1 {
+    color: #5865f2;
+    margin-bottom: 15px;
+    font-size: 28px;
+    text-shadow: 0 0 10px rgba(88,101,242,0.5);
+}
+
+.welcome-box p {
+    color: #bbb;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+/* BUTTONS */
+.btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #5865f2, #4752c4);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(88,101,242,0.4);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px rgba(88,101,242,0.7);
+}
+
+.btn.secondary {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.btn.secondary:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+/* STATUS */
+.status {
+    font-size: 13px;
+    color: #888;
+    margin-top: 25px;
+    opacity: 0.8;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <img src="https://storage-saturn.neocities.org/saturnbanner.png" class="banner">
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/games">Games</a>
+        <a href="/catalog">Catalog</a>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+    </nav>
+</header>
+
+<main>
+    <div class="welcome-box">
+
+        <h1>👋 Welcome to Saturn</h1>
+
+        <p>
+            Discover amazing games, explore the catalog and join the community.
+            Your journey starts here!
+        </p>
+
+        <div class="btn-group">
+            <button class="btn" onclick="location.href='/games'">Explore Games</button>
+            <button class="btn secondary" onclick="location.href='/register'">Create Account</button>
+        </div>
+
+        <div class="status">
+            Users: 0 🚀
+        </div>
+
+    </div>
+</main>
+
+<script>
+if (localStorage.getItem("maintenance") === "true") {
+    if (!window.location.pathname.includes("maintenance.html")) {
+        window.location.href = "/maintenance.html";
+    }
+}
+</script>
+
+</body>
+</html>

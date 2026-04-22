@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saturn - Register</title>
+
+<link rel="icon" href="https://storage-saturn.neocities.org/sicon.png">
+
+<style>
+/* MESMO ESTILO */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Arial; }
+
+body {
+    background: linear-gradient(135deg, #0f0f14, #1a1a2e, #0f0f14);
+    color: white;
+}
+
+header {
+    background: rgba(20,20,30,0.7);
+    backdrop-filter: blur(10px);
+}
+
+.banner {
+    display:block;
+    margin:0 auto;
+    max-width:380px;
+    height:70px;
+}
+
+nav {
+    display:flex;
+    justify-content:center;
+    gap:35px;
+    padding:15px;
+}
+
+nav a {
+    color:#aaa;
+    text-decoration:none;
+    font-weight:600;
+}
+
+nav a:hover { color:white; }
+
+main {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height: calc(100vh - 150px);
+}
+
+/* BOX */
+.box {
+    background: rgba(30,30,45,0.6);
+    backdrop-filter: blur(15px);
+    padding: 40px;
+    border-radius: 16px;
+    width: 350px;
+    text-align:center;
+}
+
+.box h2 {
+    margin-bottom:20px;
+    color:#5865f2;
+}
+
+input {
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border:none;
+    border-radius:8px;
+}
+
+button {
+    width:100%;
+    padding:10px;
+    background:#5865f2;
+    border:none;
+    border-radius:8px;
+    color:white;
+    cursor:pointer;
+}
+
+button:hover { background:#4752c4; }
+
+.link {
+    margin-top:15px;
+    font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <img src="https://storage-saturn.neocities.org/saturnbanner.png" class="banner">
+    <nav>
+        <a href="/">Home</a>
+        <a href="/games">Games</a>
+        <a href="catalog">Catalog</a>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+    </nav>
+</header>
+
+<main>
+<div class="box">
+
+    <h2>Register</h2>
+
+    <input id="user" placeholder="Username">
+    <input id="pass" type="password" placeholder="Password">
+
+    <button onclick="register()">Create Account</button>
+
+    <div class="link">
+        Do you already have an account? <a href="/login" style="color:#5865f2;">Login here</a>
+    </div>
+
+</div>
+</main>
+
+<script>
+let users = JSON.parse(localStorage.getItem("users")) || {};
+
+function register(){
+    let u = document.getElementById("user").value;
+    let p = document.getElementById("pass").value;
+
+    if(!u || !p){
+        alert("Preencha tudo!");
+        return;
+    }
+
+    if(users[u]){
+        alert("Usuário já existe!");
+        return;
+    }
+
+    users[u] = p;
+    localStorage.setItem("users", JSON.stringify(users));
+
+    alert("Conta criada!");
+    location.href = "/login";
+}
+</script>
+
+<script>
+if (localStorage.getItem("maintenance") === "true") {
+    if (!window.location.pathname.includes("maintenance.html")) {
+        window.location.href = "/maintenance.html";
+    }
+}
+</script>
+
+</body>
+</html>

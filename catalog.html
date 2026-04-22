@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saturn - Catalog</title>
+
+<link rel="icon" href="https://storage-saturn.neocities.org/sicon.png">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial;
+}
+
+body {
+    background: linear-gradient(135deg, #0f0f14, #1a1a2e, #0f0f14);
+    color: white;
+}
+
+/* HEADER */
+header {
+    background: rgba(20,20,30,0.7);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.banner {
+    display: block;
+    margin: 0 auto;
+    max-width: 380px;
+    height: 70px;
+}
+
+/* NAV */
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    padding: 15px;
+}
+
+nav a {
+    color: #aaa;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+nav a:hover {
+    color: white;
+}
+
+/* MAIN */
+main {
+    padding: 40px;
+}
+
+/* TITLE */
+.title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.title h1 {
+    font-size: 28px;
+    color: #5865f2;
+}
+
+/* GRID */
+.catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+/* ITEM */
+.item-card {
+    background: rgba(30,30,45,0.7);
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.item-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(88,101,242,0.5);
+}
+
+.item-card img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.item-card h4 {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.price {
+    color: #00ff99;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+/* BUY BUTTON */
+.buy-btn {
+    margin-top: 8px;
+    padding: 6px 12px;
+    background: #00c853;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.buy-btn:hover {
+    background: #00a844;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <img src="https://storage-saturn.neocities.org/saturnbanner.png" class="banner">
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/games">Games</a>
+        <a href="/catalog">Catalog</a>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+    </nav>
+</header>
+
+<main>
+
+<div class="title">
+    <h1>🛒 Catalog</h1>
+</div>
+
+<div class="catalog-grid">
+
+    <div class="item-card" data-item="Dominus Empyreus">
+        <img src="https://tr.rbxcdn.com/7c9f8b2f/420/420/Hat/Png">
+        <h4>Dominus Empyreus</h4>
+        <div class="price">∞ Robux</div>
+        <button class="buy-btn" onclick="buyItem(this)">Buy</button>
+    </div>
+
+    <div class="item-card" data-item="Dominus Frigidus">
+        <img src="https://tr.rbxcdn.com/5d5c9f5a/420/420/Hat/Png">
+        <h4>Dominus Frigidus</h4>
+        <div class="price">∞ Robux</div>
+        <button class="buy-btn" onclick="buyItem(this)">Buy</button>
+    </div>
+
+    <div class="item-card" data-item="Valkyrie Helm">
+        <img src="https://tr.rbxcdn.com/3d5f8c2a/420/420/Hat/Png">
+        <h4>Valkyrie Helm</h4>
+        <div class="price">50,000 Robux</div>
+        <button class="buy-btn" onclick="buyItem(this)">Buy</button>
+    </div>
+
+    <div class="item-card" data-item="Clockwork Headphones">
+        <img src="https://tr.rbxcdn.com/4a1c8e2f/420/420/Hat/Png">
+        <h4>Clockwork Headphones</h4>
+        <div class="price">75,000 Robux</div>
+        <button class="buy-btn" onclick="buyItem(this)">Buy</button>
+    </div>
+
+    <div class="item-card" data-item="Red Baseball Cap">
+        <img src="https://tr.rbxcdn.com/2f7e3b1c/420/420/Hat/Png">
+        <h4>Red Baseball Cap</h4>
+        <div class="price">Free</div>
+        <button class="buy-btn" onclick="buyItem(this)">Buy</button>
+    </div>
+
+    <div class="item-card" data-item="Workclock Shades">
+        <img src="https://tr.rbxcdn.com/6c2d1e9a/420/420/Hat/Png">
+        <h4>Workclock Shades</h4>
+        <div class="price">15,000 Robux</div>
+        <button class="buy-btn" onclick="buyItem(this)">Buy</button>
+    </div>
+
+</div>
+
+</main>
+
+<script>
+// INVENTÁRIO
+let inventory = JSON.parse(localStorage.getItem("inventory")) || [];
+
+// COMPRAR
+function buyItem(btn){
+    let item = btn.parentElement.getAttribute("data-item");
+
+    if(inventory.includes(item)){
+        alert("Você já possui esse item!");
+        return;
+    }
+
+    inventory.push(item);
+    localStorage.setItem("inventory", JSON.stringify(inventory));
+
+    btn.innerText = "Owned";
+    btn.style.background = "gray";
+
+    alert("Você comprou: " + item);
+}
+
+// MARCAR OWNED AO CARREGAR
+document.querySelectorAll(".item-card").forEach(card => {
+    let item = card.getAttribute("data-item");
+    let btn = card.querySelector(".buy-btn");
+
+    if(inventory.includes(item)){
+        btn.innerText = "Owned";
+        btn.style.background = "gray";
+    }
+});
+</script>
+
+<script>
+if (localStorage.getItem("maintenance") === "true") {
+    if (!window.location.pathname.includes("maintenance.html")) {
+        window.location.href = "/maintenance.html";
+    }
+}
+</script>
+
+</body>
+</html>
