@@ -193,10 +193,10 @@ main {
 </main>
 
 <script>
-// INVENTÁRIO
+// INVENTORY
 let inventory = JSON.parse(localStorage.getItem("inventory")) || [];
 
-// COMPRAR
+// BUY
 function buyItem(btn){
     let item = btn.parentElement.getAttribute("data-item");
 
@@ -211,7 +211,7 @@ function buyItem(btn){
     btn.innerText = "Owned";
     btn.style.background = "gray";
 
-    alert("Você comprou: " + item);
+    alert("You purchased: " + item);
 }
 
 // MARK AS OWNED WHEN UPLOADING
